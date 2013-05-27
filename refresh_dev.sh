@@ -34,7 +34,7 @@ exec dbms_utility.compile_schema('MY_SCHEMA');
 exit;
 EOF
 
-# Give grants to lm_readonly to MY_SCHEMA'S objects
+# Give grants from SOURCE_SCHEMA to MY_SCHEMA'S objects
 sqlplus / as sysdba <<EOF
 @/home/ai/scripts/grant_readonly_access.sql
 exit;

@@ -1,0 +1,12 @@
+set serveroutput on
+DECLARE
+cursor c1 IS select owner, object_name, object_type 
+  		from dba_objects 
+			where OWNER='MY_SCHEMA' AND OBJECT_TYPE  IN ('TABLE', 'VIEW');
+BEGIN
+FOR rec in c1 LOOP
+execute immediate 'grant select on MY_SCHEMA.'||rec.object_name||' to MY_SCHEMA_READONLY';
+dbms_output.put_line('select granted on '||rec.owner||'.'||rec.object_name||' to MY_SCHEMA_READONLY');
+END LOOP;
+end;
+/
